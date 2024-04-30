@@ -14,7 +14,7 @@ library(flexdashboard) # always
 This project is an analysis of world forest data according to its accessibility to the populations surrounding them.
 
 You can find the code for this dashboard here:
-https://github.com/Leshi-bot/DACSS_690V-Final_Project_Drafting
+https://github.com/Leshi-bot/DACSS_690V_Final_Project
 
 ## Column {.tabset .tabset-fade}
 
