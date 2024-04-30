@@ -1,0 +1,55 @@
+---
+title: "Where have our forests gone?"
+bibliography: testVisual.bib
+output: 
+  flexdashboard::flex_dashboard
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard) # always
+```
+
+## Sidebar {.sidebar}
+
+This project is an analysis of world forest data according to its accessibility to the populations surrounding them.
+
+You can find the code for this dashboard here:
+https://github.com/Leshi-bot/DACSS_690V-Final_Project_Drafting
+
+## Column {.tabset .tabset-fade}
+
+
+### How much of our forests are left?
+
+```{r}
+readRDS("del4Draft.rds")
+```
+
+
+### Where are our forests?
+
+```{r}
+readRDS("del2Draft.rds")
+```
+
+### Who owns our forests?
+
+```{r}
+readRDS("del1Draft.rds")
+```
+
+
+### How much room do our forests have left?
+
+```{r}
+readRDS("del3Draft.rds")
+```
+
+
+### References
+<div id="refs">
+  <p>[1] U.S. Bureau of Labor Statistics. 2024, "Population Level", FRED: Federal Reserve Bank of St. Louis, https://fred.stlouisfed.org/series/CNP16OV.</p>
+  <p>[2] Watanabe, Takumi. 2024, "World Forest Area (km and \%)", Kaggle, https://www.kaggle.com/datasets/webdevbadger/world-forest-area.</p>
+  <p>[3] Koop, Avery. 2022, "The one chart you need to understand how income is distributed in the US", World Economic Forum, https://www.weforum.org/agenda/2022/07/household-income-distribution-wealth-inequality-united-states/.</p>
+  <p>[4] Esri. 2023, "World Countries", ArcGIS Hub, https://hub.arcgis.com/datasets/esri::world-countries/explore.</p>
+</div>

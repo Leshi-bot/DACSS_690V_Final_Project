@@ -1,0 +1,46 @@
+---
+title: "Where have our forests gone?"
+bibliography: final_project.bib
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard) # always
+```
+
+## Intro {.sidebar}
+
+This project is an analysis of world forest data according to its accessibility to the populations surrounding them.
+
+### References
+<div id = "refs"></div>
+
+## Column {data-width="650"}
+
+### How much of our forests are left?
+
+```{r}
+readRDS("del4Draft.rds")
+```
+
+### Where are our forests?
+
+```{r}
+readRDS("del2Draft.rds")
+```
+
+## Column {data-width="650"}
+
+### Who owns our forests?
+
+```{r}
+readRDS("del1Draft.rds")
+```
+
+### How much room do our forests have?
+
+```{r}
+readRDS("del3Draft.rds")
+```
