@@ -11,20 +11,12 @@ library(flexdashboard) # always
 
 ## Sidebar {.sidebar}
 
-This project is an analysis of world forest data according to its accessibility to the populations surrounding them.
+This project is an analysis of world forest data according to its accessibility to the populations surrounding them. The initial data set was pulled from Kaggle, created by user @takumi_watanabe_world_2024, and references data pulled from @the_world_bank_terms_2024. Additionally, data regarding population variation was eventually pulled from the Federal Reserve Bank of St. Louis, which itself pulls information from @us_bureau_of_labor_statistics_population_2024. Similarly, socioeconomic data presented by World Economic Forum user @avery_koop_one_2022 was also extracted. These data assisted in further analyzing its effects on deforestation and its relationships with local communities. Lastly, map data was pulled from @esri_world_2022 to create a global visual that meticulously compared deforestation between every country for which forest data existed. 
 
 You can find the code for this dashboard here:
 https://github.com/Leshi-bot/DACSS_690V_Final_Project
 
 ## Column {.tabset .tabset-fade}
-
-
-### How much of our forests are left?
-
-```{r}
-readRDS("del4Draft.rds")
-```
-
 
 ### Where are our forests?
 
@@ -32,24 +24,27 @@ readRDS("del4Draft.rds")
 readRDS("del2Draft.rds")
 ```
 
-### Who owns our forests?
+
+### Who has access to our forests?
 
 ```{r}
 readRDS("del1Draft.rds")
 ```
 
 
-### How much room do our forests have left?
+### How much forest is left?
 
 ```{r}
 readRDS("del3Draft.rds")
 ```
 
 
+### Where have our forests changed?
+
+```{r}
+readRDS("del4Draft.rds")
+```
+
+
 ### References
-<div id="refs">
-  <p>[1] U.S. Bureau of Labor Statistics. 2024, "Population Level", FRED: Federal Reserve Bank of St. Louis, https://fred.stlouisfed.org/series/CNP16OV.</p>
-  <p>[2] Watanabe, Takumi. 2024, "World Forest Area (km and \%)", Kaggle, https://www.kaggle.com/datasets/webdevbadger/world-forest-area.</p>
-  <p>[3] Koop, Avery. 2022, "The one chart you need to understand how income is distributed in the US", World Economic Forum, https://www.weforum.org/agenda/2022/07/household-income-distribution-wealth-inequality-united-states/.</p>
-  <p>[4] Esri. 2023, "World Countries", ArcGIS Hub, https://hub.arcgis.com/datasets/esri::world-countries/explore.</p>
-</div>
+<div id="refs"></div>

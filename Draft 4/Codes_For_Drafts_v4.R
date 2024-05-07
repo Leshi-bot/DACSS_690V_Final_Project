@@ -42,9 +42,9 @@ str(mydata_d1)
 
 # deliverable 1 ----------------------------------------------------------
 
-title_text = 'Who owns our forests?'
-source_text = 'Source: Kaggle, World Bank Data'
-sub_title_text = 'Global Data - 1992 to 2021'
+title_text = 'Access to Global Forest Area per Socioeconomic Class'
+source_text = 'Source: Kaggle, World Bank'
+sub_title_text = '1992 to 2021'
 x_axis_text = 'Income Bracket'
 y_axis_text = 'Forest %'
 
@@ -58,7 +58,7 @@ mydata_d1
 base = ggplot(mydata_d1, aes(x = Country.Name,
                            y = gap,
                            color = PositiveGap,
-                           label = round(gap, 2)))#here
+                           label = round(gap, 2)))
 
 base = base + theme_classic()
 
@@ -90,11 +90,11 @@ lolliplot5 = lolliplot4 +  geom_label(aes(label=Country.Name),
                                       show.legend = FALSE ) +
   theme(axis.text.x = element_blank())
 
-lolliplot6 = lolliplot5 + labs(#title = title_text,
+lolliplot6 = lolliplot5 + labs(title = title_text,
                      subtitle = sub_title_text,
                      x = NULL, #x_axis_text,
-                     y = NULL) #y_axis_text,
-                     #caption = source_text)
+                     y = NULL, #y_axis_text,
+                     caption = source_text)
 
 del1Draft = lolliplot6
 del1Draft
@@ -125,9 +125,9 @@ sk = Skew(mydata_d2$X2021,
 
 
 # prepare texts
-title_text2 = 'Where are our forests?'
-source_text2 = 'Source: Kaggle, World Bank Data'
-sub_title_text2 = 'Global Data - 2021'
+title_text2 = 'Distribution of Global Forest Area per Country'
+source_text2 = 'Source: Kaggle, World Bank'
+sub_title_text2 = '2021'
 y_axis_text2 = 'Forest Mileage (millions)'
 
 theVar = mydata_d2$X2021
@@ -148,11 +148,11 @@ vio = base + geom_violin(trim = FALSE, fill = "orange")
 viobox = vio + geom_boxplot(width = 0.2)
 
 viobox = viobox  + coord_flip() +
-  labs(#title=title_text2,
+  labs(title=title_text2,
                         subtitle = sub_title_text2,
                         x = '',
-                        y = y_axis_text2) +
-                        #caption = source_text) +
+                        y = y_axis_text2,
+                        caption = source_text) +
   annotate(geom = 'text',
            label = annOutUN,
            y = upperT,
@@ -404,24 +404,25 @@ pivot_ratios = class_ratios %>%
 
 
 bivariate_base = ggplot(data = pivot_ratios,
-             aes(x = year, y = ratio,
+             aes(x = ratio, y = year,
                  fill = class)) + theme_minimal()
 
 Dodge_graph = bivariate_base +
   geom_bar(stat = "identity", position = 'dodge') +
   geom_text(aes(label = round(ratio, digits = 0)), 
-            position = position_dodge(width = 0.9), 
-            vjust = -0.5) +  # Adjust vertical position of labels
-  labs(#title = "How much room do our forests have?",
-       subtitle = "Forest coverage by year (every 7 years)",
-       x = "",
-       y = "sq miles / 1000 people",
-       fill = "class") +
-       #caption = "Source: Kaggle, World Bank Data, Federal Reserve Economic Data, World Economic Forum") +
+            position = position_dodge(width = 1),
+            hjust = 0, #-0.05,
+            vjust = 0.35) +  # Adjust vertical position of labels
+  labs(title = "Global Forest Area Population per Socioeconomic Class",
+       subtitle = "1993 to 2021",
+       x = "sq miles / 1000 people",
+       y = "",
+       fill = "class",
+       caption = "Source: Kaggle, World Bank, FRED, World Economic Forum") +
   theme_minimal()
 
 del3Draft = Dodge_graph
-del3Draft 
+del3Draft
 
 
 
@@ -433,11 +434,14 @@ saveRDS(del3Draft, file = "del3Draft.rds")
 
 # file sourced from https://hub.arcgis.com/datasets/esri::world-countries/explore
 global_map = st_read('World_Countries_(Generalized).gpkg')
-global_map = global_map[-c(7, 8, 16, 28, 31, 33, 43, 49, 50, 55, 75, 80, 82,
-                           89, 93, 96, 101, 115, 117, 133, 140, 143, 147, 150,
-                           155, 163, 164, 178, 182, 183, 187, 188, 189, 190, 
-                           194, 211, 218, 227, 240, 245, 248), ]
+global_map$COUNTRY[57] <- "Cote d'Ivoire"
+global_map = global_map[-c(8), ] #7, 16, 28, 31, 33, 43, 49, 50, 55, 75, 80, 82,
+#                           89, 93, 96, 101, 115, 117, 133, 140, 143, 147, 150,
+#                           155, 163, 164, 178, 182, 183, 187, 188, 189, 190, 
+#                           194, 211, 218, 227, 240, 245, 248), ]
 row.names(global_map) <- NULL
+
+
 
 head(global_map)
 
@@ -449,7 +453,7 @@ base + geom_sf()
 
 
 map_data_diff = mydata_mi %>%
-  select(Country.Name, X1992, X2012, X2021)
+  select(Country.Name, X1992, X2021)
 map_data_diff <- map_data_diff[1:211,]
 colnames(map_data_diff) = sub("X", "mi", colnames(map_data_diff))
 
@@ -459,7 +463,7 @@ str(map_data_diff$Country.Name)
 map_data_diff$Country.Name[14] <- 'Bahamas'
 map_data_diff$Country.Name[45] <- 'Congo DRC'
 map_data_diff$Country.Name[46] <- 'Congo'
-map_data_diff$Country.Name[48] <- "Côte d'Ivoire"
+map_data_diff$Country.Name[48] <- "Cote d'Ivoire"
 map_data_diff$Country.Name[53] <- "Czech Republic"
 map_data_diff$Country.Name[59] <- "Egypt"
 map_data_diff$Country.Name[72] <- "Gambia"
@@ -482,24 +486,24 @@ map_data_diff$Country.Name[207] <- "US Virgin Islands"
 map_data_diff$Country.Name[208] <- "Palestinian Territory"
 map_data_diff$Country.Name[209] <- "Yemen"
 
+#map_data_diff = na.omit(map_data_diff)
 
-
-map_diff1 = map_data_diff %>%
-  select(Country.Name, mi2012)
-map_diff1$year = 2012
-map_diff1$percent_diff = (map_diff1$mi2012 / map_data_diff$mi1992) * 100
-map_diff1 = pivot_wider(map_diff1,
-                  names_from = year,
-                  values_from = mi2012)
-map_diff1 = pivot_longer(map_diff1,
-                         cols = '2012',
-                         names_to = 'year',
-                         values_to = 'mileage')
+#map_diff1 = map_data_diff %>%
+#  select(Country.Name, mi2012)
+#map_diff1$year = 2012
+#map_diff1$percent_diff = (map_diff1$mi2012 / map_data_diff$mi1992) * 100
+#map_diff1 = pivot_wider(map_diff1,
+#                  names_from = year,
+#                  values_from = mi2012)
+#map_diff1 = pivot_longer(map_diff1,
+#                         cols = '2012',
+#                         names_to = 'year',
+#                         values_to = 'mileage')
 
 map_diff2 = map_data_diff %>%
   select(Country.Name, mi2021)
 map_diff2$year = 2021
-map_diff2$percent_diff = (map_diff2$mi2021 / map_data_diff$mi1992) * 100
+map_diff2$ratio = (map_diff2$mi2021 / map_data_diff$mi1992) #* 100
 map_diff2 = pivot_wider(map_diff2,
                         names_from = year,
                         values_from = mi2021)
@@ -508,25 +512,39 @@ map_diff2 = pivot_longer(map_diff2,
                          names_to = 'year',
                          values_to = 'mileage')
 
-map_data_yr <- rbind(map_diff1, map_diff2)
-
-# Maybe get average increase/decrease instead of percent difference? 
-mi_map_yr = merge(global_map, map_data_yr,
+map_data_2021 = merge(global_map, map_diff2,
                     by.x = 'COUNTRY', by.y = 'Country.Name')
 
+#map_data_yr <- rbind(map_diff1, map_diff2)
+
+# Maybe get average increase/decrease instead of percent difference? 
+#mi_map_yr = merge(global_map, map_data_yr,
+#                    by.x = 'COUNTRY', by.y = 'Country.Name')
 
 
 
 
-head(mi_map_yr)
 
-base = ggplot(data = global_map) + theme_light() + geom_sf(fill = 'red') 
+#head(mi_map_yr)
+
+base = ggplot(data = global_map) + theme(panel.grid.major = element_blank(), 
+                                         panel.grid.minor = element_blank(),
+                                         panel.background = element_blank(),
+                                         axis.text.x=element_blank(),
+                                         axis.ticks.x=element_blank()) + 
+  geom_sf(fill = 'red') 
 
 
-del4Draft = base + geom_sf(data = mi_map_yr,
-                         aes(fill = percent_diff)) + 
-  scale_fill_viridis_c(direction = -1) +
-  facet_grid(~year)
+del4Draft = base + geom_sf(data = map_data_2021, #data = mi_map_yr,
+                         aes(fill = ratio)) +
+  scale_fill_viridis_b() +
+  labs(title = "Change in Global Forest Area per Country",
+       subtitle = "1992 to 2021",
+       x = "",
+       y = "",
+       caption = "Source: Kaggle, World Bank, ArcGIS Hub")
+  #scale_fill_viridis_c(direction = -1) #+
+  #facet_grid(~year)
 del4Draft
 
 # save del4Draft ----------------------------------------------------------
